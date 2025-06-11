@@ -10,5 +10,6 @@ router.get('/employee/:employeeId', decodeToken, allowManager, managerController
 router.post('/employee/add', decodeToken, allowManager, managerController.addNewEmployee);
 router.put('/employee/:id', decodeToken, allowManager, managerController.updateEmployeeDetail);
 router.delete('/employee/:id', decodeToken, allowManager, managerController.deleteEmployee);
+router.get('/profile',decodeToken,allowManager,managerController.getProfile)
 
 module.exports = router;

@@ -36,8 +36,8 @@ const getEmployeeById = async (req, res) => {
 const addNewEmployee = async (req, res) => {
     try {
         const managerId = req.user.id;
-        console.log("manager iddddddd",managerId);
-        
+        console.log("manager iddddddd", managerId);
+
         const newEmp = await manager.addEmployee({ ...req.body, managerId });
         console.log(newEmp);
 
@@ -70,6 +70,24 @@ const deleteEmployee = async (req, res) => {
         res.status(500).json({ error: 'Failed to delete employee' });
     }
 }
+
+const getProfile = async (req, res) => {
+ const manager_id = req.user.id;
+    console.log(manager_id);
+
+
+    try {
+        const managerDetail = await manager.getProfile(manager_id);
+
+        if (!managerDetail) {
+            return res.status(404).json({ error: 'manager not found' });
+        }
+
+        res.json({ managerDetail });
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
+    }
+}
 module.exports = {
-    getEmployeeById, getEmployees, addNewEmployee, deleteEmployee, updateEmployeeDetail
+    getEmployeeById, getEmployees, addNewEmployee, deleteEmployee, updateEmployeeDetail, getProfile
 };

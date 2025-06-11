@@ -14,12 +14,12 @@ const manager = {
     },
     addEmployee: async (data) => {
 
-        const { user_id, full_name, email, phone_number, location, date_of_joining, blood_group, gender,manager_id } = data;
+        const { user_id, full_name, email, phone_number, location, date_of_joining, blood_group, gender, manager_id } = data;
 
         console.log(user_id, full_name, email, phone_number, location, date_of_joining, blood_group, gender, manager_id)
 
-        console.log(manager_id,"iiiiiiiiiiiiii");
-        
+        console.log(manager_id, "iiiiiiiiiiiiii");
+
 
         try {
             const [rows] = await db.execute('INSERT INTO employees (user_id, full_name, email, phone_number, location, date_of_joining, blood_group, gender, manager_id) VALUES (?, ?, ?, ?,?,?,?,?,?)',
@@ -56,7 +56,15 @@ const manager = {
         console.log(result);
 
         return result;
+    },
+    getProfile: async (manager_id) => {
+
+        const [rows] = await db.execute('SELECT * FROM managers WHERE user_id = ?', [manager_id]);
+        console.log(rows[0]);
+
+        return rows[0];
     }
+
 }
 
 
